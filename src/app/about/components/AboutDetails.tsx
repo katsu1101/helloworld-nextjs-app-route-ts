@@ -1,5 +1,9 @@
-import {AboutDetailsProps} from "@/types/team";
-import Image from "next/image";
+import {TeamMember} from "@prisma/client";
+import Image        from "next/image";
+
+type AboutDetailsProps = {
+  members: TeamMember[];
+};
 
 export default function AboutDetails({members}: AboutDetailsProps) {
   return (
@@ -12,7 +16,7 @@ export default function AboutDetails({members}: AboutDetailsProps) {
         {members.map((member, index) => (
           <a key={index}
              href={`/members/${member.id}`}
-               className="w-64 bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105">
+             className="w-64 bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105">
             <Image
               src={member.image} alt={member.name} className="w-full h-40 object-cover"
               width={128} height={128}

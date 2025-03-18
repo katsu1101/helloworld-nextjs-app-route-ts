@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { TeamMember }          from "@/types/team";
-import Link                    from "next/link";
-import Image                   from "next/image";
+import {useEffect, useState} from "react";
+import Link                  from "next/link";
+import Image                 from "next/image";
+
+import {TeamMember} from "@prisma/client";
 
 export default function MembersPage() {
   const [members, setMembers] = useState<TeamMember[]>([]);

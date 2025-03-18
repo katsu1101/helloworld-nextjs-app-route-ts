@@ -1,4 +1,4 @@
-import {TeamMember} from "@/types/team";
+import {TeamMember} from "@prisma/client";
 
 export async function fetchTeamMember(): Promise<TeamMember[]> {
   const response = await fetch("/api/members");

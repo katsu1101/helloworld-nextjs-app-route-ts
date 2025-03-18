@@ -1,8 +1,8 @@
 "use client"; // クライアントコンポーネント
 
+import {TeamMember}          from "@prisma/client";
 import {useEffect, useState} from "react";
 
-import {TeamMember}      from "@/types/team";
 import {fetchTeamMember} from "@/services/memberService";
 
 import AboutHero    from "./components/AboutHero";

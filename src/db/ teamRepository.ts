@@ -1,28 +1,50 @@
-import {TeamMember} from "@/types/team";
+import {PrismaClient, TeamMember} from "@prisma/client";
 
-// 仮のデータ（今はハードコード、後でDBに移行）
-const members: TeamMember[] = [
-  {id: 1, name: "Alice", role: "Founder", image: "/team/Alice.webp"},
-  {id: 2, name: "Bob", role: "Developer", image: "/team/Bob.webp"},
-  {id: 3, name: "Charlie", role: "Designer", image: "/team/Charlie.webp"},
-]
+
+const prisma = new PrismaClient();
 
 export class TeamRepository {
   /**
    * 全メンバーを取得
-   * - 現在: ハードコード
-   * - 将来: DB に接続
    */
   async getAll(): Promise<TeamMember[]> {
-    return members;
+    return prisma.teamMember.findMany();
   }
 
   /**
    * メンバーIDから取得
-   * - 現在: ハードコード
-   * - 将来: DB に接続
    */
   async getById(memberId: number): Promise<TeamMember | null> {
-    return members.find(member => member.id === memberId) || null; // ❗ 将来は `prisma.teamMember.findUnique();`
+    return prisma.teamMember.findUnique({
+      where: {id: memberId},
+    });
+  }
+
+  /**
+   * 新しいメンバーを作成
+   */
+  async create(member: Omit<TeamMember, "id">): Promise<TeamMember> {
+    return prisma.teamMember.create({
+      data: member,
+    });
+  }
+
+  /**
+   * メンバーを更新
+   */
+  async update(memberId: number, data: Partial<Omit<TeamMember, "id">>): Promise<TeamMember | null> {
+    return prisma.teamMember.update({
+      where: {id: memberId},
+      data,
+    });
+  }
+
+  /**
+   * メンバーを削除
+   */
+  async delete(memberId: number): Promise<TeamMember | null> {
+    return prisma.teamMember.delete({
+      where: {id: memberId},
+    });
   }
 }

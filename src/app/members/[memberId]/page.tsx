@@ -1,9 +1,11 @@
 "use client";
 
-import { useParams }           from "next/navigation";
-import { useEffect, useState } from "react";
-import { TeamMember }          from "@/types/team";
-import Image                   from "next/image";
+import {useEffect, useState} from "react";
+import {useParams}           from "next/navigation";
+import Image                 from "next/image";
+
+import {TeamMember} from "@prisma/client";
+
 
 export default function MemberPage() {
   const params = useParams();
